@@ -47,7 +47,6 @@ namespace NewYork_BackEnd.Models
                     Role = "admin",
                     TeamID = null
                 });
-            
 
             /*context.Tags.AddRange(
                 new Tag { Name = "Sport" },
