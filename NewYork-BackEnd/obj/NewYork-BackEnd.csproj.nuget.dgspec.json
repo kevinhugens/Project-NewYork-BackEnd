@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\iebe1\\Documents\\ITF 3\\Eerste semester\\Angular\\APPLICATION CHALLANGE\\Project-NewYork-BackEnd\\NewYork-BackEnd\\NewYork-BackEnd.csproj": {}
+    "C:\\Users\\kevin\\Desktop\\Project-NewYork-BackEnd\\NewYork-BackEnd\\NewYork-BackEnd.csproj": {}
   },
   "projects": {
-    "C:\\Users\\iebe1\\Documents\\ITF 3\\Eerste semester\\Angular\\APPLICATION CHALLANGE\\Project-NewYork-BackEnd\\NewYork-BackEnd\\NewYork-BackEnd.csproj": {
+    "C:\\Users\\kevin\\Desktop\\Project-NewYork-BackEnd\\NewYork-BackEnd\\NewYork-BackEnd.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\iebe1\\Documents\\ITF 3\\Eerste semester\\Angular\\APPLICATION CHALLANGE\\Project-NewYork-BackEnd\\NewYork-BackEnd\\NewYork-BackEnd.csproj",
+        "projectUniqueName": "C:\\Users\\kevin\\Desktop\\Project-NewYork-BackEnd\\NewYork-BackEnd\\NewYork-BackEnd.csproj",
         "projectName": "NewYork-BackEnd",
-        "projectPath": "C:\\Users\\iebe1\\Documents\\ITF 3\\Eerste semester\\Angular\\APPLICATION CHALLANGE\\Project-NewYork-BackEnd\\NewYork-BackEnd\\NewYork-BackEnd.csproj",
-        "packagesPath": "C:\\Users\\iebe1\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\iebe1\\Documents\\ITF 3\\Eerste semester\\Angular\\APPLICATION CHALLANGE\\Project-NewYork-BackEnd\\NewYork-BackEnd\\obj\\",
+        "projectPath": "C:\\Users\\kevin\\Desktop\\Project-NewYork-BackEnd\\NewYork-BackEnd\\NewYork-BackEnd.csproj",
+        "packagesPath": "C:\\Users\\kevin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kevin\\Desktop\\Project-NewYork-BackEnd\\NewYork-BackEnd\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\iebe1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\kevin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

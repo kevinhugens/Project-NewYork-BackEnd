@@ -44,7 +44,7 @@ namespace NewYork_BackEnd.Models
                     HashSalt = saltUser1,
                     DateOfBirth = DateTime.Now,
                     Role = "user",
-                    TeamID = null
+                    TeamID = 1
                 });
             byte[] saltUser2 = Hashing.getSalt();
             context.Users.AddRange(
@@ -57,7 +57,7 @@ namespace NewYork_BackEnd.Models
                     HashSalt = saltUser2,
                     DateOfBirth = DateTime.Now,
                     Role = "user",
-                    TeamID = null
+                    TeamID = 2
                 });
             byte[] saltUser3 = Hashing.getSalt();
             context.Users.AddRange(
@@ -94,6 +94,7 @@ namespace NewYork_BackEnd.Models
                 });
 
             #endregion
+            context.SaveChanges();
             #region Table
             context.AddRange(
                 new Table
@@ -129,6 +130,7 @@ namespace NewYork_BackEnd.Models
                 });
 
             #endregion
+            context.SaveChanges();
             #region ranking
             context.AddRange(
                 new Ranking
@@ -145,10 +147,35 @@ namespace NewYork_BackEnd.Models
                     CompetitionID = 1
                 });
             #endregion
+            context.SaveChanges();
             #region Game
-
+            context.AddRange(
+                new Game
+                {
+                    Type = "1vs1",
+                    ScoreTeam1 = 0,
+                    ScoreTeam2 = 0,
+                    Date = DateTime.Now,
+                    Address = "Address game 1",
+                    Team1ID = 1,
+                    Team2ID = 2
+                });
             #endregion
-
+            context.SaveChanges();
+            #region UserGame
+            context.AddRange(
+                new UserGame
+                {
+                    UserID = 1,
+                    GameID = 1
+                });
+            context.AddRange(
+                new UserGame
+                {
+                    UserID = 2,
+                    GameID = 1
+                });
+            #endregion
             context.SaveChanges();
         }
     }

@@ -19,7 +19,7 @@ namespace NewYork_BackEnd.Models
         public Team Team1 { get; set; }
         public int? Team2ID { get; set; }
         public Team Team2 { get; set; }
-        public int CompetitionID { get; set; }
+        public int? CompetitionID { get; set; }
         //public Competition Competition { get; set; }
 
         public ICollection<UserGame> UserGames { get; set; }
