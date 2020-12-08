@@ -21,6 +21,8 @@ namespace NewYork_BackEnd.Models
         public Team Team2 { get; set; }
         public int CompetitionID { get; set; }
         //public Competition Competition { get; set; }
+
+        public ICollection<UserGame> UserGames { get; set; }
     }
 }
     

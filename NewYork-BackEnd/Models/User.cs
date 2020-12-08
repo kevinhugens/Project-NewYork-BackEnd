@@ -22,6 +22,8 @@ namespace NewYork_BackEnd.Models
         //Relations
         public int? TeamID { get; set; }
         //public Team Team { get; set; }
+
+        public ICollection<UserGame> UserGames { get; set; }
     }
-}
+}   
     
