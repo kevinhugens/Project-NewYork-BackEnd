@@ -25,14 +25,14 @@ namespace NewYork_BackEnd.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Team>>> GetTeam()
         {
-            return await _context.Team.ToListAsync();
+            return await _context.Team.Include(t => t.TeamMembers).Include(t => t.Captain).ToListAsync();
         }
 
         // GET: api/Team/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Team>> GetTeam(int id)
         {
-            var team = await _context.Team.FindAsync(id);
+            var team = await _context.Team.Include(c => c.Captain).SingleOrDefaultAsync(i => i.TeamID == id);
 
             if (team == null)
             {

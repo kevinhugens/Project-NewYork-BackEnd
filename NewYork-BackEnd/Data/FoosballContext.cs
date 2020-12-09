@@ -28,6 +28,7 @@ namespace NewYork_BackEnd.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             modelBuilder.Entity<User>().ToTable("User");
             modelBuilder.Entity<Table>().ToTable("Table");
             modelBuilder.Entity<Team>().ToTable("Team");
@@ -35,11 +36,13 @@ namespace NewYork_BackEnd.Data
             modelBuilder.Entity<Game>().ToTable("Game");
             modelBuilder.Entity<Competition>().ToTable("Competition");
             modelBuilder.Entity<UserGame>().ToTable("UserGame");
+
         }
 
 
-        
 
-        
+
+
+
     }
 }

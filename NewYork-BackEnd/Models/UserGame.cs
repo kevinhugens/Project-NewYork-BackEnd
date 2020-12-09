@@ -8,7 +8,8 @@ namespace NewYork_BackEnd.Models
     public class UserGame
     {
         public int UserGameID { get; set; }
-        public int UserID { get; set; }
+        public int? UserID { get; set; }
+        public User? Player { get; set; }
         public int GameID { get; set; }
     }
 }

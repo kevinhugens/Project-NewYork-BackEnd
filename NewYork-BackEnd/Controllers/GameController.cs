@@ -25,14 +25,14 @@ namespace NewYork_BackEnd.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Game>>> GetGame()
         {
-            return await _context.Game.ToListAsync();
+            return await _context.Game.Include(t => t.Table).Include(t => t.Team1).Include(t => t.Team2).Include(t=>t.UserGames).ToListAsync();
         }
 
         // GET: api/Game/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Game>> GetGame(int id)
         {
-            var game = await _context.Game.FindAsync(id);
+            var game = await _context.Game.Include(t => t.Table).Include(t => t.Team1).Include(t => t.Team2).Include(t => t.UserGames).SingleOrDefaultAsync(i => i.GameID == id);
 
             if (game == null)
             {

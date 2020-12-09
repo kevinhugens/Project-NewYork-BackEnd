@@ -156,9 +156,9 @@ namespace NewYork_BackEnd.Models
                     ScoreTeam1 = 0,
                     ScoreTeam2 = 0,
                     Date = DateTime.Now,
-                    Address = "Address game 1",
                     Team1ID = 1,
-                    Team2ID = 2
+                    Team2ID = 2,
+                    TableID = 1
                 });
             #endregion
             context.SaveChanges();
