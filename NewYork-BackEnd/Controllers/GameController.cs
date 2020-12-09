@@ -42,6 +42,38 @@ namespace NewYork_BackEnd.Controllers
             return game;
         }
 
+        [HttpGet("competition/next")]
+        public async Task<ActionResult<Game>> GetNextCompetitionGame()
+        {
+            DateTime date = DateTime.Today;
+            var games = await _context.Game.Where(g => g.CompetitionID != null && g.Date > date).ToListAsync();
+            var orderedgames = games.OrderBy(g => g.Date);
+            var game = orderedgames.First();
+
+            if (game == null)
+            {
+                return NotFound();
+            }
+
+            return game;
+        }
+
+        [HttpGet("friendly/next")]
+        public async Task<ActionResult<Game>> GetNextFriendlyGame()
+        {
+            DateTime date = DateTime.Today;
+            var games = await _context.Game.Where(g => g.CompetitionID == null && g.Date > date).ToListAsync();
+            var orderedgames = games.OrderBy(g => g.Date);
+            var game = orderedgames.First();
+
+            if (game == null)
+            {
+                return NotFound();
+            }
+
+            return game;
+        }
+
         // PUT: api/Game/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
