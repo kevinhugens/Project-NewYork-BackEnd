@@ -25,7 +25,7 @@ namespace NewYork_BackEnd.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Ranking>>> GetRanking()
         {
-            return await _context.Ranking.ToListAsync();
+            return await _context.Ranking.Include(r => r.Team).ToListAsync();
         }
 
         // GET: api/Ranking/5

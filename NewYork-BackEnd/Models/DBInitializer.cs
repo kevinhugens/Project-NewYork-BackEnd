@@ -72,6 +72,45 @@ namespace NewYork_BackEnd.Models
                     Role = "user",
                     TeamID = null
                 });
+            byte[] saltUser4 = Hashing.getSalt();
+            context.Users.AddRange(
+                new User
+                {
+                    FirstName = "user4",
+                    LastName = "user4",
+                    Email = "user4@testing.be",
+                    Password = Hashing.getHash("user4", saltUser4),
+                    HashSalt = saltUser3,
+                    DateOfBirth = DateTime.Now,
+                    Role = "user",
+                    TeamID = null
+                });
+            byte[] saltUser5 = Hashing.getSalt();
+            context.Users.AddRange(
+                new User
+                {
+                    FirstName = "user5",
+                    LastName = "user5",
+                    Email = "user5@testing.be",
+                    Password = Hashing.getHash("user5", saltUser5),
+                    HashSalt = saltUser5,
+                    DateOfBirth = DateTime.Now,
+                    Role = "user",
+                    TeamID = null
+                });
+            byte[] saltUser6 = Hashing.getSalt();
+            context.Users.AddRange(
+                new User
+                {
+                    FirstName = "user6",
+                    LastName = "user6",
+                    Email = "user6@testing.be",
+                    Password = Hashing.getHash("user6", saltUser6),
+                    HashSalt = saltUser6,
+                    DateOfBirth = DateTime.Now,
+                    Role = "user",
+                    TeamID = null
+                });
             #endregion
             #region Team
             context.AddRange(
@@ -135,14 +174,14 @@ namespace NewYork_BackEnd.Models
             context.AddRange(
                 new Ranking
                 {
-                    Points = 0,
+                    Points = 5,
                     TeamID = 1,
                     CompetitionID = 1
                 });
             context.AddRange(
                 new Ranking
                 {
-                    Points = 0,
+                    Points = 2,
                     TeamID = 2,
                     CompetitionID = 1
                 });
@@ -158,7 +197,8 @@ namespace NewYork_BackEnd.Models
                     Date = DateTime.Now,
                     Address = "Address game 1",
                     Team1ID = 1,
-                    Team2ID = 2
+                    Team2ID = 2,
+                    CompetitionID=1
                 });
             #endregion
             context.SaveChanges();
