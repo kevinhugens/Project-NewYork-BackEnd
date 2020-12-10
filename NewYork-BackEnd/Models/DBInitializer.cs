@@ -27,7 +27,7 @@ namespace NewYork_BackEnd.Models
                     FirstName = "admin",
                     LastName = "admin",
                     Email = "admin@admin.be",
-                    Password = Hashing.getHash("admin",saltAdmin),
+                    Password = Hashing.getHash("admin", saltAdmin),
                     HashSalt = saltAdmin,
                     DateOfBirth = DateTime.Now,
                     Role = "admin",
@@ -131,6 +131,12 @@ namespace NewYork_BackEnd.Models
                     Photo = "Team2.jpg",
                     CaptainID = 3
                 });
+            context.AddRange(
+                new Team { TeamName = "The Big App", CompanyName = "Thomas More Geel", Address = "Kleinhoefstraat 4, 2440 Geel", Photo = "Team2.jpg", CaptainID = 3 },
+                new Team { TeamName = "Hawaii", CompanyName = "Thomas De Nayer", Address = "Jan De Nayerlaan 5, 2860 Sint-Katelijne-Waver", Photo = "Team2.jpg", CaptainID = 3 },
+                new Team { TeamName = "Georgia", CompanyName = "Thomas More Lier", Address = "Antwerpsestraat 99, 2500 Lier", Photo = "Team2.jpg", CaptainID = 3 },
+                new Team { TeamName = "Florida", CompanyName = "Thomas More Vorselaar", Address = "Lepelstraat 2, 2290 Vorselaar", Photo = "Team2.jpg", CaptainID = 3 }
+            );
 
             #endregion
             context.SaveChanges();
@@ -198,7 +204,7 @@ namespace NewYork_BackEnd.Models
                     Team1ID = 1,
                     Team2ID = 2,
                     TableID = 1,
-                    CompetitionID=1
+                    CompetitionID = 1
                 });
             #endregion
             context.SaveChanges();
