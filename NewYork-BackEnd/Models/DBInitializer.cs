@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using Microsoft.EntityFrameworkCore;
 using NewYork_BackEnd.Data;
 using System;
 using System.Collections.Generic;
@@ -111,22 +112,14 @@ namespace NewYork_BackEnd.Models
                     Role = "user",
                     TeamID = null
                 });
-            byte[] saltWouter = Hashing.getSalt();
-            byte[] saltIebe = Hashing.getSalt();
-            byte[] saltKevin = Hashing.getSalt();
-            byte[] saltArno = Hashing.getSalt();
-            context.Users.AddRange(
-                new User { FirstName = "Wouter", LastName = "Vanaelten", Email = "woutervanaelten@thomasmore.be", Password = Hashing.getHash("test", saltWouter), HashSalt = saltWouter, DateOfBirth = DateTime.Now.AddYears(-20), Role = "user", TeamID = null },
-                new User { FirstName = "Iebe", LastName = "Maes", Email = "iebemaes@thomasmore.be", Password = Hashing.getHash("test", saltIebe), HashSalt = saltIebe, DateOfBirth = DateTime.Now.AddYears(-20), Role = "user", TeamID = null },
-                new User { FirstName = "Kevin", LastName = "Huygens", Email = "kevinhuygens@thomasmore.be", Password = Hashing.getHash("test", saltKevin), HashSalt = saltKevin, DateOfBirth = DateTime.Now.AddYears(-20), Role = "user", TeamID = null }
-                new User { FirstName = "Arno", LastName = "Vangoetsenhoven", Email = "arnovangoetsenhoven@thomasmore.be", Password = Hashing.getHash("test", saltArno), HashSalt = saltArno, DateOfBirth = DateTime.Now.AddYears(-20), Role = "user", TeamID = null }
-                );
+
             #endregion
 
             #region Team
             context.AddRange(
                 new Team
                 {
+                    TeamID = 1,
                     TeamName = "Team1",
                     CompanyName = "Company1",
                     Address = "Address Team 1",
@@ -136,6 +129,7 @@ namespace NewYork_BackEnd.Models
             context.AddRange(
                 new Team
                 {
+                    TeamID = 2,
                     TeamName = "Team2",
                     CompanyName = "Company2",
                     Address = "Address Team 2",
@@ -143,11 +137,23 @@ namespace NewYork_BackEnd.Models
                     CaptainID = 3
                 });
             context.AddRange(
-                new Team { TeamName = "The Big App", CompanyName = "Thomas More Geel", Address = "Kleinhoefstraat 4, 2440 Geel", Photo = "Team2.jpg", CaptainID = 3 },
-                new Team { TeamName = "Hawaii", CompanyName = "Thomas De Nayer", Address = "Jan De Nayerlaan 5, 2860 Sint-Katelijne-Waver", Photo = "Team2.jpg", CaptainID = 3 },
-                new Team { TeamName = "Georgia", CompanyName = "Thomas More Lier", Address = "Antwerpsestraat 99, 2500 Lier", Photo = "Team2.jpg", CaptainID = 3 },
-                new Team { TeamName = "Florida", CompanyName = "Thomas More Vorselaar", Address = "Lepelstraat 2, 2290 Vorselaar", Photo = "Team2.jpg", CaptainID = 3 }
+                new Team { TeamID = 3, TeamName = "The Big App", CompanyName = "Thomas More Geel", Address = "Kleinhoefstraat 4, 2440 Geel", Photo = "Team2.jpg", CaptainID = 3 },
+                new Team { TeamID = 4, TeamName = "Hawaii", CompanyName = "Thomas De Nayer", Address = "Jan De Nayerlaan 5, 2860 Sint-Katelijne-Waver", Photo = "Team2.jpg", CaptainID = 3 },
+                new Team { TeamID = 5, TeamName = "Georgia", CompanyName = "Thomas More Lier", Address = "Antwerpsestraat 99, 2500 Lier", Photo = "Team2.jpg", CaptainID = 3 },
+                new Team { TeamID = 6, TeamName = "Florida", CompanyName = "Thomas More Vorselaar", Address = "Lepelstraat 2, 2290 Vorselaar", Photo = "Team2.jpg", CaptainID = 3 }
             );
+
+            context.Database.OpenConnection();
+            try
+            {
+                context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Team] ON");
+                context.SaveChanges();
+                context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Team] OFF");
+            }
+            finally
+            {
+                context.Database.CloseConnection();
+            }
 
             #endregion
             context.SaveChanges();
