@@ -25,14 +25,14 @@ namespace NewYork_BackEnd.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserGame>>> GetUserGame()
         {
-            return await _context.UserGame.Include(u => u.User).ToListAsync();
+            return await _context.UserGame.Include(u => u.Player).ToListAsync();
         }
 
         // GET: api/UserGame/5
         [HttpGet("{id}")]
         public async Task<ActionResult<UserGame>> GetUserGame(int id)
         {
-            var userGame = await _context.UserGame.Include(u => u.User).FirstOrDefaultAsync(u => u.UserGameID == id);
+            var userGame = await _context.UserGame.Include(u => u.Player).FirstOrDefaultAsync(u => u.UserGameID == id);
 
             if (userGame == null)
             {
@@ -45,7 +45,7 @@ namespace NewYork_BackEnd.Controllers
         [HttpGet("game/{gameid}")]
         public async Task<ActionResult<IEnumerable<UserGame>>> GetUserGamesByGame(int gameid)
         {
-            return await _context.UserGame.Include(u => u.User).Where(u => u.GameID == gameid).ToListAsync();
+            return await _context.UserGame.Include(u => u.Player).Where(u => u.GameID == gameid).ToListAsync();
         }
 
         // PUT: api/UserGame/5
