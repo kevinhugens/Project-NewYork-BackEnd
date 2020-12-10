@@ -31,7 +31,7 @@ namespace NewYork_BackEnd.Models
                     HashSalt = saltAdmin,
                     DateOfBirth = DateTime.Now,
                     Role = "admin",
-                    TeamID = null
+                    TeamID = 2
                 });
             byte[] saltUser1 = Hashing.getSalt();
             context.Users.AddRange(
@@ -70,7 +70,7 @@ namespace NewYork_BackEnd.Models
                     HashSalt = saltUser3,
                     DateOfBirth = DateTime.Now,
                     Role = "user",
-                    TeamID = null
+                    TeamID = 1
                 });
             byte[] saltUser4 = Hashing.getSalt();
             context.Users.AddRange(
@@ -197,6 +197,7 @@ namespace NewYork_BackEnd.Models
                     Date = DateTime.Now,
                     Team1ID = 1,
                     Team2ID = 2,
+                    TableID = 1,
                     CompetitionID=1
                 });
             #endregion
