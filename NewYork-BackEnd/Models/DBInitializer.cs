@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using Microsoft.EntityFrameworkCore;
 using NewYork_BackEnd.Data;
 using System;
 using System.Collections.Generic;
@@ -51,11 +52,11 @@ namespace NewYork_BackEnd.Models
                     FirstName = "admin",
                     LastName = "admin",
                     Email = "admin@admin.be",
-                    Password = Hashing.getHash("admin",saltAdmin),
+                    Password = Hashing.getHash("admin", saltAdmin),
                     HashSalt = saltAdmin,
                     DateOfBirth = DateTime.Now,
                     Role = "admin",
-                    TeamID = null
+                    TeamID = 2
                 });
             byte[] saltUser1 = Hashing.getSalt();
             context.Users.AddRange(
@@ -94,7 +95,7 @@ namespace NewYork_BackEnd.Models
                     HashSalt = saltUser3,
                     DateOfBirth = DateTime.Now,
                     Role = "user",
-                    TeamID = null
+                    TeamID = 1
                 });
             byte[] saltUser4 = Hashing.getSalt();
             context.Users.AddRange(
@@ -135,11 +136,14 @@ namespace NewYork_BackEnd.Models
                     Role = "user",
                     TeamID = null
                 });
+
             #endregion
+
             #region Team
             context.AddRange(
                 new Team
                 {
+                    TeamID = 1,
                     TeamName = "Team1",
                     CompanyName = "Company1",
                     Address = "Address Team 1",
@@ -149,12 +153,31 @@ namespace NewYork_BackEnd.Models
             context.AddRange(
                 new Team
                 {
+                    TeamID = 2,
                     TeamName = "Team2",
                     CompanyName = "Company2",
                     Address = "Address Team 2",
                     Photo = "Team2.jpg",
                     CaptainID = 3
                 });
+            context.AddRange(
+                new Team { TeamID = 3, TeamName = "The Big App", CompanyName = "Thomas More Geel", Address = "Kleinhoefstraat 4, 2440 Geel", Photo = "Team2.jpg", CaptainID = 3 },
+                new Team { TeamID = 4, TeamName = "Hawaii", CompanyName = "Thomas De Nayer", Address = "Jan De Nayerlaan 5, 2860 Sint-Katelijne-Waver", Photo = "Team2.jpg", CaptainID = 3 },
+                new Team { TeamID = 5, TeamName = "Georgia", CompanyName = "Thomas More Lier", Address = "Antwerpsestraat 99, 2500 Lier", Photo = "Team2.jpg", CaptainID = 3 },
+                new Team { TeamID = 6, TeamName = "Florida", CompanyName = "Thomas More Vorselaar", Address = "Lepelstraat 2, 2290 Vorselaar", Photo = "Team2.jpg", CaptainID = 3 }
+            );
+
+            context.Database.OpenConnection();
+            try
+            {
+                context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Team] ON");
+                context.SaveChanges();
+                context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Team] OFF");
+            }
+            finally
+            {
+                context.Database.CloseConnection();
+            }
 
             #endregion
             context.SaveChanges();
@@ -177,7 +200,17 @@ namespace NewYork_BackEnd.Models
                     Photo = "Table2.jpg",
                     ManagerID = 2
                 });
+
+            context.AddRange(
+                new Table { TableName = "Aggora-tafel", CompanyName = "Thomas More Geel", Address = "Kleinhoefstraat 4, 2440 Geel", Photo = "Table3.jpg", ManagerID = 1 },
+                new Table { TableName = "Kickeren - The Hive", CompanyName = "Thomas More Geel", Address = "Kleinhoefstraat 4, 2440 Geel", Photo = "Table3.jpg", ManagerID = 1 },
+                new Table { TableName = "Foosball", CompanyName = "Thomas De Nayer", Address = "Jan De Nayerlaan 5, 2860 Sint-Katelijne-Waver", Photo = "Table1.jpg", ManagerID = 1 },
+                new Table { TableName = "Kick Hard", CompanyName = "Thomas More Lier", Address = "Antwerpsestraat 99, 2500 Lier", ManagerID = 1 },
+                new Table { TableName = "Kicker plaats", CompanyName = "Thomas More Vorselaar", Address = "Lepelstraat 2, 2290 Vorselaar", Photo = "Table1.jpg", ManagerID = 1 }
+            );
+
             #endregion
+
             #region competition
             context.AddRange(
                 new Competition
@@ -219,11 +252,12 @@ namespace NewYork_BackEnd.Models
                     ScoreTeam1 = 0,
                     ScoreTeam2 = 0,
                     Date = DateTime.Now,
-                    Address = "Address game 1",
                     Team1ID = 1,
                     Team2ID = 2,
                     CompetitionID=1,
-                    GameStatusID = 1
+                    GameStatusID = 1,
+                    TableID = 1
+
                 });
             #endregion
             context.SaveChanges();

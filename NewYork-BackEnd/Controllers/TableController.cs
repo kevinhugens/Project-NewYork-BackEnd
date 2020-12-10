@@ -25,7 +25,7 @@ namespace NewYork_BackEnd.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Table>>> GetTable()
         {
-            return await _context.Table.ToListAsync();
+            return await _context.Table.Include(m => m.Manager).ToListAsync();
         }
 
         // GET: api/Table/5

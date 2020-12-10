@@ -25,7 +25,7 @@ namespace NewYork_BackEnd.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Game>>> GetGame()
         {
-            return await _context.Game.Include(g => g.Team1).Include(g => g.Team2).ToListAsync();
+             return await _context.Game.Include(t => t.Table).Include(t => t.Team1).Include(t => t.Team2).Include(t=>t.UserGames).ToListAsync();
         }
 
         [HttpGet("gamesbyteam/{id}")]
@@ -38,14 +38,14 @@ namespace NewYork_BackEnd.Controllers
         public async Task<ActionResult<IEnumerable<Game>>> GetNextGamesFromTeam(int id)
         {
             DateTime date = DateTime.Today;
-            return await _context.Game.Include(g => g.Team1).Include(g => g.Team2).Where(g => g.GameStatusID == 1 && g.Date > date).Where(g => g.Team1ID == id || g.Team2ID == id).ToListAsync();
+            return await _context.Game.Include(t => t.Table).Include(g => g.Team1).Include(g => g.Team2).Where(g => g.GameStatusID == 1 && g.Date > date).Where(g => g.Team1ID == id || g.Team2ID == id).ToListAsync();
         }
 
         // GET: api/Game/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Game>> GetGame(int id)
         {
-            var game = await _context.Game.Include(g => g.Team1).Include(g => g.Team2).FirstOrDefaultAsync(g => g.GameID == id);
+            var game = await _context.Game.Include(t => t.Table).Include(t => t.Team1).Include(t => t.Team2).Include(t => t.UserGames).SingleOrDefaultAsync(i => i.GameID == id);
 
             if (game == null)
             {
@@ -117,6 +117,50 @@ namespace NewYork_BackEnd.Controllers
             }
 
             return game;
+        }
+
+        [HttpGet("friendly/next/user/{teamID}")]
+        public async Task<ActionResult<Game>> GetNextFriendlyGameUser(int teamID)
+        {
+            DateTime date = DateTime.Today;
+            var games = await _context.Game.Where(g => g.CompetitionID == null && g.Date > date && (g.Team1ID == teamID || g.Team2ID == teamID)).ToListAsync();
+            var orderedgames = games.OrderBy(g => g.Date);
+            var game = orderedgames.First();
+
+            if (game == null)
+            {
+                return NotFound();
+            }
+
+            return game;
+        }
+
+        [HttpGet("friendly/planned/team/{teamID}")]
+        public async Task<ActionResult<IEnumerable<Game>>> GetPlannedFriendlyTeamGames(int teamID)
+        {
+            DateTime date = DateTime.Today;
+            var games = await _context.Game.Where(g => g.CompetitionID == null && g.Date > date && (g.Team1ID == teamID || g.Team2ID == teamID)).OrderBy(g => g.Date).ToListAsync();
+
+            if (games == null)
+            {
+                return NotFound();
+            }
+
+            return games;
+        }
+
+        [HttpGet("friendly/played/team/{teamID}")]
+        public async Task<ActionResult<IEnumerable<Game>>> GetPlayedFriendlyTeamGames(int teamID)
+        {
+            DateTime date = DateTime.Today;
+            var games = await _context.Game.Where(g => g.CompetitionID == null && g.Date < date && (g.Team1ID == teamID || g.Team2ID == teamID)).OrderBy(g => g.Date).ToListAsync();
+
+            if (games == null)
+            {
+                return NotFound();
+            }
+
+            return games;
         }
 
         // PUT: api/Game/5

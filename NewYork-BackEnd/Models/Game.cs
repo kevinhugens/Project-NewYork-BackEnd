@@ -12,7 +12,6 @@ namespace NewYork_BackEnd.Models
         public int ScoreTeam1 { get; set; }
         public int ScoreTeam2 { get; set; }
         public DateTime Date { get; set; }
-        public string Address { get; set; }
 
         //Relations
         public int Team1ID { get; set; }
@@ -21,6 +20,8 @@ namespace NewYork_BackEnd.Models
         public Team Team2 { get; set; }
         public int? CompetitionID { get; set; }
         //public Competition Competition { get; set; }
+        public int TableID { get; set; }
+        public Table Table { get; set; }
 
         public int GameStatusID { get; set; }
         public GameStatus GameStatus { get; set; }

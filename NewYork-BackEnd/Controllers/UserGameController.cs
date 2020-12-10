@@ -108,6 +108,22 @@ namespace NewYork_BackEnd.Controllers
             return userGame;
         }
 
+        // DELETE: api/UserGame/5
+        [HttpDelete("/deletegameanduser/{gameID}/{userID}")]
+        public async Task<ActionResult<UserGame>> DeleteUserGameByGameAndUser(int gameID, int userID)
+        {
+            var userGame = await _context.UserGame.Where(u => u.GameID == gameID && u.UserID == userID).FirstAsync();
+            if (userGame == null)
+            {
+                return NotFound();
+            }
+
+            _context.UserGame.Remove(userGame);
+            await _context.SaveChangesAsync();
+
+            return userGame;
+        }
+
         private bool UserGameExists(int id)
         {
             return _context.UserGame.Any(e => e.UserGameID == id);

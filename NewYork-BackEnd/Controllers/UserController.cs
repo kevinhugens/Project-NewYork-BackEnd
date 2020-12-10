@@ -45,6 +45,19 @@ namespace NewYork_BackEnd.Controllers
             return user;
         }
 
+        [HttpGet("team")]
+        public async Task<ActionResult<IEnumerable<User>>> GetUsersWithoutTeam()
+        {
+            return await _context.Users.Where(x => x.TeamID == null).ToListAsync();
+        }
+
+        [HttpGet("team/{teamid}")]
+        public async Task<ActionResult<IEnumerable<User>>> GetUsersByTeamID(int teamid)
+        {
+            return await _context.Users.Where(x=>x.TeamID == teamid).ToListAsync();
+        }
+
+
         // PUT: api/User/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
@@ -83,6 +96,9 @@ namespace NewYork_BackEnd.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
+            user.Role = "user";
+            user.HashSalt = Hashing.getSalt();
+            user.Password = Hashing.getHash(user.Password, user.HashSalt);
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
@@ -112,6 +128,35 @@ namespace NewYork_BackEnd.Controllers
 
             _context.Users.Remove(user);
             await _context.SaveChangesAsync();
+
+            return user;
+        }
+
+        [HttpDelete("team/{userid}")]
+        public async Task<ActionResult<User>> DeleteUserFromTeam(int userid)
+        {
+            var user = await _context.Users.FindAsync(userid);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            user.TeamID = null;
+            _context.Entry(user).State = EntityState.Modified;
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UserExists(userid))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             return user;
         }
