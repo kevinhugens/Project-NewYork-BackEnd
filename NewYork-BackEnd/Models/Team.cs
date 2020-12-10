@@ -16,7 +16,7 @@ namespace NewYork_BackEnd.Models
 
 
         //Relations
-        public int CaptainID { get; set; }
+        public int? CaptainID { get; set; }
         public User Captain { get; set; }
         public ICollection<User> TeamMembers { get; set; }
         //public ICollection<Game> Games { get; set; }
