@@ -111,7 +111,18 @@ namespace NewYork_BackEnd.Models
                     Role = "user",
                     TeamID = null
                 });
+            byte[] saltWouter = Hashing.getSalt();
+            byte[] saltIebe = Hashing.getSalt();
+            byte[] saltKevin = Hashing.getSalt();
+            byte[] saltArno = Hashing.getSalt();
+            context.Users.AddRange(
+                new User { FirstName = "Wouter", LastName = "Vanaelten", Email = "woutervanaelten@thomasmore.be", Password = Hashing.getHash("test", saltWouter), HashSalt = saltWouter, DateOfBirth = DateTime.Now.AddYears(-20), Role = "user", TeamID = null },
+                new User { FirstName = "Iebe", LastName = "Maes", Email = "iebemaes@thomasmore.be", Password = Hashing.getHash("test", saltIebe), HashSalt = saltIebe, DateOfBirth = DateTime.Now.AddYears(-20), Role = "user", TeamID = null },
+                new User { FirstName = "Kevin", LastName = "Huygens", Email = "kevinhuygens@thomasmore.be", Password = Hashing.getHash("test", saltKevin), HashSalt = saltKevin, DateOfBirth = DateTime.Now.AddYears(-20), Role = "user", TeamID = null }
+                new User { FirstName = "Arno", LastName = "Vangoetsenhoven", Email = "arnovangoetsenhoven@thomasmore.be", Password = Hashing.getHash("test", saltArno), HashSalt = saltArno, DateOfBirth = DateTime.Now.AddYears(-20), Role = "user", TeamID = null }
+                );
             #endregion
+
             #region Team
             context.AddRange(
                 new Team
@@ -159,7 +170,17 @@ namespace NewYork_BackEnd.Models
                     Photo = "Table2.jpg",
                     ManagerID = 2
                 });
+
+            context.AddRange(
+                new Table { TableName = "Aggora-tafel", CompanyName = "Thomas More Geel", Address = "Kleinhoefstraat 4, 2440 Geel", Photo = "Table3.jpg", ManagerID = 1 },
+                new Table { TableName = "Kickeren - The Hive", CompanyName = "Thomas More Geel", Address = "Kleinhoefstraat 4, 2440 Geel", Photo = "Table3.jpg", ManagerID = 1 },
+                new Table { TableName = "Foosball", CompanyName = "Thomas De Nayer", Address = "Jan De Nayerlaan 5, 2860 Sint-Katelijne-Waver", Photo = "Table1.jpg", ManagerID = 1 },
+                new Table { TableName = "Kick Hard", CompanyName = "Thomas More Lier", Address = "Antwerpsestraat 99, 2500 Lier", ManagerID = 1 },
+                new Table { TableName = "Kicker plaats", CompanyName = "Thomas More Vorselaar", Address = "Lepelstraat 2, 2290 Vorselaar", Photo = "Table1.jpg", ManagerID = 1 }
+            );
+
             #endregion
+
             #region competition
             context.AddRange(
                 new Competition
