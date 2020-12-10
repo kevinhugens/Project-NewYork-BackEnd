@@ -20,6 +20,30 @@ namespace NewYork_BackEnd.Models
             {
                 return;   // DB has been seeded
             }
+            #region GameStatus
+            context.AddRange(
+                new GameStatus
+                {
+                    Name = "Gepland"
+                });
+            context.AddRange(
+                new GameStatus
+                {
+                    Name = "Bezig"
+                });
+            context.AddRange(
+                new GameStatus
+                {
+                    Name = "Beëindigd"
+                });
+            context.AddRange(
+                new GameStatus
+                {
+                    Name = "Moderator"
+                });
+            #endregion
+            context.SaveChanges();
+
             #region Users
             byte[] saltAdmin = Hashing.getSalt();
             context.Users.AddRange(
@@ -230,8 +254,10 @@ namespace NewYork_BackEnd.Models
                     Date = DateTime.Now,
                     Team1ID = 1,
                     Team2ID = 2,
-                    TableID = 1,
-                    CompetitionID = 1
+                    CompetitionID=1,
+                    GameStatusID = 1,
+                    TableID = 1
+
                 });
             #endregion
             context.SaveChanges();
