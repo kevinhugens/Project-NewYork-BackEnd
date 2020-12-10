@@ -22,7 +22,10 @@ namespace NewYork_BackEnd.Models
         public int? CompetitionID { get; set; }
         //public Competition Competition { get; set; }
 
+        public int GameStatusID { get; set; }
+        public GameStatus GameStatus { get; set; }
+
         public ICollection<UserGame> UserGames { get; set; }
     }
 }
-    
+        

@@ -25,7 +25,7 @@ namespace NewYork_BackEnd.Data
 
         public DbSet<Competition> Competition { get; set; }
         public DbSet<UserGame> UserGame { get; set; }
-
+        public DbSet<GameStatus> GameStatus { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().ToTable("User");
@@ -35,7 +35,10 @@ namespace NewYork_BackEnd.Data
             modelBuilder.Entity<Game>().ToTable("Game");
             modelBuilder.Entity<Competition>().ToTable("Competition");
             modelBuilder.Entity<UserGame>().ToTable("UserGame");
+            modelBuilder.Entity<GameStatus>().ToTable("GameStatus");
         }
+
+        
 
 
         
