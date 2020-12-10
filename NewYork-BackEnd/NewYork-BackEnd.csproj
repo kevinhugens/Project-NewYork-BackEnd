@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>NewYork_BackEnd</RootNamespace>
+    <UserSecretsId>88cde6ec-c8ee-4688-a539-4c83cd05130f</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
