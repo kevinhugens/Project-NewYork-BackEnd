@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -107,18 +110,6 @@ namespace NewYork_BackEnd.Controllers
         private bool TeamExists(int id)
         {
             return _context.Team.Any(e => e.TeamID == id);
-        }
-
-        [HttpPost("uploadimage")]
-        public async Task<IActionResult> UploadTeamImage(IFormFile file)
-        {
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(AppConfiguration.GetConfiguration("AccessKey"));
-            CloudBlobClient BlobClient = storageAccount.CreateCloudBlobClient();
-            CloudBlobContainer container = BlobClient.GetContainerReference("newyork-thebigapp");
-            await container.CreateIfNotExistsAsync();
-            CloudBlockBlob blob = container.GetBlockBlobReference(file.FileName);
-            await blob.UploadFromStreamAsync(file.OpenReadStream());
-            return Ok("File uploaded");
         }
     }
 }
