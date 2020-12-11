@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,7 @@ namespace NewYork_BackEnd.Controllers
         }
 
         // GET: api/User
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
@@ -32,6 +34,7 @@ namespace NewYork_BackEnd.Controllers
         }
 
         // GET: api/User/5
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
@@ -61,6 +64,7 @@ namespace NewYork_BackEnd.Controllers
         // PUT: api/User/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, User user)
         {
@@ -117,6 +121,7 @@ namespace NewYork_BackEnd.Controllers
         }
 
         // DELETE: api/User/5
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<User>> DeleteUser(int id)
         {
@@ -132,6 +137,7 @@ namespace NewYork_BackEnd.Controllers
             return user;
         }
 
+        [Authorize]
         [HttpDelete("team/{userid}")]
         public async Task<ActionResult<User>> DeleteUserFromTeam(int userid)
         {
