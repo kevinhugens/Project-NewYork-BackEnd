@@ -292,26 +292,26 @@ namespace NewYork_BackEnd.Models
 
             #region Game
             context.AddRange(
-                new Game { GameID = 1, Type = "1vs1", ScoreTeam1 = 11, ScoreTeam2 = 5, Date = DateTime.Now.AddDays(-5), Team1ID = 1, Team2ID = 2, TableID = 1, CompetitionID = 1 },
-                new Game { GameID = 2, Type = "1vs1", ScoreTeam1 = 11, ScoreTeam2 = 3, Date = DateTime.Now.AddDays(-5), Team1ID = 3, Team2ID = 4, TableID = 2, CompetitionID = 1 },
-                new Game { GameID = 3, Type = "1vs1", ScoreTeam1 = 11, ScoreTeam2 = 5, Date = DateTime.Now.AddDays(-2), Team1ID = 3, Team2ID = 1, TableID = 3, CompetitionID = 1 },
-                new Game { GameID = 4, Type = "1vs1", ScoreTeam1 = 8, ScoreTeam2 = 11, Date = DateTime.Now.AddDays(-3), Team1ID = 2, Team2ID = 4, TableID = 4, CompetitionID = 1 },
+                new Game { GameID = 1, Type = "1vs1", ScoreTeam1 = 11, ScoreTeam2 = 5, Date = DateTime.Now.AddDays(-5), Team1ID = 1, Team2ID = 2, TableID = 1, CompetitionID = 1, GameStatusID = 3},
+                new Game { GameID = 2, Type = "1vs1", ScoreTeam1 = 11, ScoreTeam2 = 3, Date = DateTime.Now.AddDays(-5), Team1ID = 3, Team2ID = 4, TableID = 2, CompetitionID = 1, GameStatusID = 3},
+                new Game { GameID = 3, Type = "1vs1", ScoreTeam1 = 11, ScoreTeam2 = 5, Date = DateTime.Now.AddDays(-2), Team1ID = 3, Team2ID = 1, TableID = 3, CompetitionID = 1, GameStatusID = 3 },
+                new Game { GameID = 4, Type = "1vs1", ScoreTeam1 = 8, ScoreTeam2 = 11, Date = DateTime.Now.AddDays(-3), Team1ID = 2, Team2ID = 4, TableID = 4, CompetitionID = 1, GameStatusID = 3 },
 
                 //Vriendschappelijke wedstrijden
-                new Game { GameID = 5, Type = "1vs1", ScoreTeam1 = 5, ScoreTeam2 = 11, Date = DateTime.Now.AddDays(-4), Team1ID = 1, Team2ID = 2, TableID = 5, CompetitionID = null },
-                new Game { GameID = 6, Type = "1vs1", ScoreTeam1 = 3, ScoreTeam2 = 11, Date = DateTime.Now.AddDays(-2), Team1ID = 3, Team2ID = 4, TableID = 6, CompetitionID = null },
-                new Game { GameID = 7, Type = "1vs1", ScoreTeam1 = 5, ScoreTeam2 = 11, Date = DateTime.Now.AddDays(-1), Team1ID = 5, Team2ID = 6, TableID = 7, CompetitionID = null },
-                new Game { GameID = 8, Type = "1vs1", ScoreTeam1 = 8, ScoreTeam2 = 11, Date = DateTime.Now.AddDays(-0), Team1ID = 1, Team2ID = 3, TableID = 1, CompetitionID = null },
-                new Game { GameID = 9, Type = "1vs1", ScoreTeam1 = 3, ScoreTeam2 = 11, Date = DateTime.Now.AddDays(3), Team1ID = 1, Team2ID = 4, TableID = 2, CompetitionID = null },
-                new Game { GameID = 10, Type = "1vs1", ScoreTeam1 = 2, ScoreTeam2 = 11, Date = DateTime.Now.AddDays(5), Team1ID = 6, Team2ID = 5, TableID = 3, CompetitionID = null },
+                new Game { GameID = 5, Type = "1vs1", ScoreTeam1 = 5, ScoreTeam2 = 11, Date = DateTime.Now.AddDays(-4), Team1ID = 1, Team2ID = 2, TableID = 5, CompetitionID = null, GameStatusID = 3 },
+                new Game { GameID = 6, Type = "1vs1", ScoreTeam1 = 3, ScoreTeam2 = 11, Date = DateTime.Now.AddDays(-2), Team1ID = 3, Team2ID = 4, TableID = 6, CompetitionID = null, GameStatusID = 3 },
+                new Game { GameID = 7, Type = "1vs1", ScoreTeam1 = 5, ScoreTeam2 = 11, Date = DateTime.Now.AddDays(-1), Team1ID = 5, Team2ID = 6, TableID = 7, CompetitionID = null, GameStatusID = 3 },
+                new Game { GameID = 8, Type = "1vs1", ScoreTeam1 = 0, ScoreTeam2 = 0, Date = DateTime.Now.AddDays(10), Team1ID = 1, Team2ID = 3, TableID = 1, CompetitionID = null, GameStatusID = 1 },
+                new Game { GameID = 9, Type = "1vs1", ScoreTeam1 = 0, ScoreTeam2 = 0, Date = DateTime.Now.AddDays(13), Team1ID = 1, Team2ID = 4, TableID = 2, CompetitionID = null, GameStatusID = 1 },
+                new Game { GameID = 10, Type = "1vs1", ScoreTeam1 = 0, ScoreTeam2 = 0, Date = DateTime.Now.AddDays(5), Team1ID = 6, Team2ID = 5, TableID = 3, CompetitionID = null, GameStatusID = 1 },
 
-                new Game { GameID = 11, Type = "2vs2", ScoreTeam1 = 4, ScoreTeam2 = 11, Date = DateTime.Now.AddDays(-5), Team1ID = 2, Team2ID = 4, TableID = 4, CompetitionID = null },
-                new Game { GameID = 12, Type = "2vs2", ScoreTeam1 = 6, ScoreTeam2 = 11, Date = DateTime.Now.AddDays(-8), Team1ID = 3, Team2ID = 4, TableID = 5, CompetitionID = null },
-                new Game { GameID = 13, Type = "2vs2", ScoreTeam1 = 7, ScoreTeam2 = 11, Date = DateTime.Now.AddDays(0), Team1ID = 5, Team2ID = 4, TableID = 6, CompetitionID = null },
-                new Game { GameID = 14, Type = "2vs2", ScoreTeam1 = 0, ScoreTeam2 = 11, Date = DateTime.Now.AddDays(2), Team1ID = 6, Team2ID = 4, TableID = 7, CompetitionID = null },
-                new Game { GameID = 15, Type = "2vs2", ScoreTeam1 = 6, ScoreTeam2 = 11, Date = DateTime.Now.AddDays(5), Team1ID = 2, Team2ID = 1, TableID = 1, CompetitionID = null },
-                new Game { GameID = 16, Type = "2vs2", ScoreTeam1 = 8, ScoreTeam2 = 11, Date = DateTime.Now.AddDays(10), Team1ID = 2, Team2ID = 2, TableID = 2, CompetitionID = null },
-                new Game { GameID = 17, Type = "2vs2", ScoreTeam1 = 5, ScoreTeam2 = 11, Date = DateTime.Now.AddDays(-5), Team1ID = 5, Team2ID = 3, TableID = 3, CompetitionID = null }
+                new Game { GameID = 11, Type = "2vs2", ScoreTeam1 = 0, ScoreTeam2 = 0, Date = DateTime.Now.AddDays(25), Team1ID = 2, Team2ID = 4, TableID = 4, CompetitionID = 1, GameStatusID = 1 },
+                new Game { GameID = 12, Type = "2vs2", ScoreTeam1 = 0, ScoreTeam2 = 0, Date = DateTime.Now.AddDays(18), Team1ID = 3, Team2ID = 4, TableID = 5, CompetitionID = 1, GameStatusID = 1 },
+                new Game { GameID = 13, Type = "2vs2", ScoreTeam1 = 0, ScoreTeam2 = 0, Date = DateTime.Now.AddDays(6), Team1ID = 5, Team2ID = 4, TableID = 6, CompetitionID = 1, GameStatusID = 1 },
+                new Game { GameID = 14, Type = "2vs2", ScoreTeam1 = 0, ScoreTeam2 = 0, Date = DateTime.Now.AddDays(2), Team1ID = 6, Team2ID = 4, TableID = 7, CompetitionID = 1, GameStatusID = 1 },
+                new Game { GameID = 15, Type = "2vs2", ScoreTeam1 = 0, ScoreTeam2 = 0, Date = DateTime.Now.AddDays(5), Team1ID = 2, Team2ID = 1, TableID = 1, CompetitionID = 1, GameStatusID = 1 },
+                new Game { GameID = 16, Type = "2vs2", ScoreTeam1 = 0, ScoreTeam2 = 0, Date = DateTime.Now.AddDays(10), Team1ID = 2, Team2ID = 2, TableID = 2, CompetitionID = 1, GameStatusID = 1 },
+                new Game { GameID = 17, Type = "2vs2", ScoreTeam1 = 0, ScoreTeam2 = 0, Date = DateTime.Now.AddDays(15), Team1ID = 5, Team2ID = 3, TableID = 3, CompetitionID = 1, GameStatusID = 1 }
                 );
             context.Database.OpenConnection();
             try
