@@ -37,6 +37,12 @@ namespace NewYork_BackEnd.Controllers
             return await _context.Game.Include(g => g.Team1).Include(g => g.Team2).Where(g => g.Team1ID == id || g.Team2ID == id).ToListAsync();
         }
 
+        [HttpGet("live")]
+        public async Task<ActionResult<IEnumerable<Game>>> GetLiveGames()
+        {
+            return await _context.Game.Include(g => g.Team1).Include(g => g.Team2).Where(g => g.GameStatusID == 2).ToListAsync();
+        }
+
         [HttpGet("nextgamesbyteam/{id}")]
         public async Task<ActionResult<IEnumerable<Game>>> GetNextGamesFromTeam(int id)
         {
@@ -63,7 +69,7 @@ namespace NewYork_BackEnd.Controllers
         public async Task<ActionResult<Game>> GetNextCompetitionGame()
         {
             DateTime date = DateTime.Today;
-            var games = await _context.Game.Include(g => g.Team1).Include(g => g.Team2).Where(g => g.CompetitionID != null && g.Date > date && g.GameStatusID == 1).ToListAsync();
+            var games = await _context.Game.Include(g => g.Team1).Include(g => g.Team2).Where(g => g.CompetitionID != null && g.Date > date).Where(g => g.GameStatusID == 1 || g.GameStatusID == 2).ToListAsync();
             var orderedgames = games.OrderBy(g => g.Date);
             var game = orderedgames.First();
 
@@ -79,7 +85,7 @@ namespace NewYork_BackEnd.Controllers
         public async Task<ActionResult<Game>> GetNextFriendlyGame()
         {
             DateTime date = DateTime.Today;
-            var games = await _context.Game.Include(g => g.Team1).Include(g => g.Team2).Where(g => g.CompetitionID == null && g.Date > date && g.GameStatusID == 1).ToListAsync();
+            var games = await _context.Game.Include(g => g.Team1).Include(g => g.Team2).Where(g => g.CompetitionID == null && g.Date > date ).Where(g => g.GameStatusID == 1 || g.GameStatusID == 2).ToListAsync();
             var orderedgames = games.OrderBy(g => g.Date);
             var game = orderedgames.First();
 
@@ -95,7 +101,7 @@ namespace NewYork_BackEnd.Controllers
         public async Task<ActionResult<Game>> GetNextCompetitionGame(int id)
         {
             DateTime date = DateTime.Today;
-            var games = await _context.Game.Include(g => g.Team1).Include(g => g.Team2).Where(g => g.CompetitionID != null && g.Date > date && g.GameStatusID == 1).Where(g=> g.Team1ID == id || g.Team2ID == id).ToListAsync();
+            var games = await _context.Game.Include(g => g.Team1).Include(g => g.Team2).Where(g => g.CompetitionID != null && g.Date > date).Where(g => g.GameStatusID == 1 || g.GameStatusID == 2).Where(g=> g.Team1ID == id || g.Team2ID == id).ToListAsync();
             var orderedgames = games.OrderBy(g => g.Date);
             var game = orderedgames.First();
 
