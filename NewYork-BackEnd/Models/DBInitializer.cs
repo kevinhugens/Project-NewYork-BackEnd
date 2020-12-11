@@ -20,6 +20,32 @@ namespace NewYork_BackEnd.Models
             {
                 return;   // DB has been seeded
             }
+<<<<<<< HEAD
+=======
+            #region GameStatus
+            context.AddRange(
+                new GameStatus
+                {
+                    Name = "Gepland"
+                });
+            context.AddRange(
+                new GameStatus
+                {
+                    Name = "Bezig"
+                });
+            context.AddRange(
+                new GameStatus
+                {
+                    Name = "Beëindigd"
+                });
+            context.AddRange(
+                new GameStatus
+                {
+                    Name = "Moderator"
+                });
+            #endregion
+            context.SaveChanges();
+>>>>>>> 3ae4c29fa123115d5dd94a15f6c23e7ddf257bd0
 
             #region Users
             byte[] saltWouter = Hashing.getSalt();
@@ -267,6 +293,7 @@ namespace NewYork_BackEnd.Models
             context.SaveChanges();
             #region Game
             context.AddRange(
+<<<<<<< HEAD
                 new Game { GameID = 1, Type = "1vs1", ScoreTeam1 = 11, ScoreTeam2 = 5, Date = DateTime.Now.AddDays(-5), Team1ID = 1, Team2ID = 2, TableID = 1, CompetitionID = 1 },
                 new Game { GameID = 2, Type = "1vs1", ScoreTeam1 = 11, ScoreTeam2 = 3, Date = DateTime.Now.AddDays(-5), Team1ID = 3, Team2ID = 4, TableID = 2, CompetitionID = 1 },
                 new Game { GameID = 3, Type = "1vs1", ScoreTeam1 = 11, ScoreTeam2 = 5, Date = DateTime.Now.AddDays(-2), Team1ID = 3, Team2ID = 1, TableID = 3, CompetitionID = 1 },
@@ -299,6 +326,21 @@ namespace NewYork_BackEnd.Models
             {
                 context.Database.CloseConnection();
             }
+=======
+                new Game
+                {
+                    Type = "1vs1",
+                    ScoreTeam1 = 0,
+                    ScoreTeam2 = 0,
+                    Date = DateTime.Now,
+                    Team1ID = 1,
+                    Team2ID = 2,
+                    CompetitionID=1,
+                    GameStatusID = 1,
+                    TableID = 1
+
+                });
+>>>>>>> 3ae4c29fa123115d5dd94a15f6c23e7ddf257bd0
             #endregion
 
 

@@ -36,7 +36,21 @@ namespace NewYork_BackEnd.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Ranking>> GetRanking(int id)
         {
-            var ranking = await _context.Ranking.FindAsync(id);
+            var ranking = await _context.Ranking.Include(r => r.Team).FirstOrDefaultAsync(r => r.RankingID == id);
+
+            if (ranking == null)
+            {
+                return NotFound();
+            }
+
+            return ranking;
+        }
+
+     
+        [HttpGet("team/{id}")]
+        public async Task<ActionResult<Ranking>> GetRankingByTeam(int id)
+        {
+            var ranking = await _context.Ranking.FirstOrDefaultAsync(r => r.TeamID == id);
 
             if (ranking == null)
             {

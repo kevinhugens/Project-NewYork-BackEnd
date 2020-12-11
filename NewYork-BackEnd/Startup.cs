@@ -27,6 +27,7 @@ namespace NewYork_BackEnd
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            AppConfiguration.SetConfig(configuration);
         }
 
         public IConfiguration Configuration { get; }
