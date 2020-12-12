@@ -34,7 +34,6 @@ namespace NewYork_BackEnd.Controllers
         }
 
         // GET: api/User/5
-        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
@@ -48,6 +47,7 @@ namespace NewYork_BackEnd.Controllers
             return user;
         }
 
+        [Authorize]
         [HttpGet("team")]
         public async Task<ActionResult<IEnumerable<User>>> GetUsersWithoutTeam()
         {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.WindowsAzure.Storage;
@@ -31,6 +32,7 @@ namespace NewYork_BackEnd.Controllers
             return Ok("File uploaded");
         }
 
+        [Authorize]
         [HttpGet("{filename}")]
         public async Task<Uri> GetPhoto(string filename)
         {

@@ -24,7 +24,7 @@ namespace NewYork_BackEnd.Controllers
         }
 
         // GET: api/Table
-        [Authorize]
+        [Authorize] // Authenticated users can ask tables
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Table>>> GetTable()
         {
@@ -32,7 +32,7 @@ namespace NewYork_BackEnd.Controllers
         }
 
         // GET: api/Table/5
-        [Authorize]
+        [Authorize] // Authenticated users can ask a table
         [HttpGet("{id}")]
         public async Task<ActionResult<Table>> GetTable(int id)
         {
@@ -49,7 +49,7 @@ namespace NewYork_BackEnd.Controllers
         // PUT: api/Table/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [Authorize]
+        [Authorize(Policy = "AdminOnly")] // Only an admin can edit tables
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTable(int id, Table table)
         {
@@ -82,7 +82,7 @@ namespace NewYork_BackEnd.Controllers
         // POST: api/Table
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [Authorize]
+        [Authorize(Policy = "AdminOnly")] // Only an admin can create tables
         [HttpPost]
         public async Task<ActionResult<Table>> PostTable(Table table)
         {
@@ -93,7 +93,7 @@ namespace NewYork_BackEnd.Controllers
         }
 
         // DELETE: api/Table/5
-        [Authorize]
+        [Authorize(Policy = "AdminOnly")] // Only an admin can delete tables
         [HttpDelete("{id}")]
         public async Task<ActionResult<Table>> DeleteTable(int id)
         {

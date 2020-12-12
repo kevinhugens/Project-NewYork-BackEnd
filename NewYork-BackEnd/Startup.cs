@@ -42,7 +42,13 @@ namespace NewYork_BackEnd
                        .AllowAnyHeader();
             }));
 
-            services.AddControllers();
+            services.AddControllers(); 
+
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminOnly", policy => policy.RequireClaim("Role", "'admin'"));
+            });
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(swagger =>

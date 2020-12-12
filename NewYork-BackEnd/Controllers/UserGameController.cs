@@ -46,6 +46,7 @@ namespace NewYork_BackEnd.Controllers
             return userGame;
         }
 
+        [Authorize]
         [HttpGet("game/{gameid}")]
         public async Task<ActionResult<IEnumerable<UserGame>>> GetUserGamesByGame(int gameid)
         {
