@@ -14,22 +14,16 @@ namespace NewYork_BackEnd.Models
         public static void Initialize(FoosballContext context)
         {
 
+            //context.Database.ExecuteSqlRaw("DROP TABLE [dbo].[Game]");
+            //context.Database.ExecuteSqlRaw("DROP TABLE [dbo].[Competition]");
+            //context.Database.ExecuteSqlRaw("DROP TABLE [dbo].[Ranking]");
+            //context.Database.ExecuteSqlRaw("DROP TABLE [dbo].[Table]");
+            //context.Database.ExecuteSqlRaw("DROP TABLE [dbo].[Team]");
+            //context.Database.ExecuteSqlRaw("DROP TABLE [dbo].[User]");
+            //context.Database.ExecuteSqlRaw("DROP TABLE [dbo].[UserGame]");
+            //context.SaveChanges();
 
-            //context.Database.OpenConnection();
-            //try
-            //{
-            //    //context.Database.ExecuteSqlRaw("DROP TABLE [dbo].[Competition]");
-            //    //context.Database.ExecuteSqlRaw("DROP TABLE [dbo].[Game]");
-            //    //context.Database.ExecuteSqlRaw("DROP TABLE [dbo].[Ranking]");
-            //    //context.Database.ExecuteSqlRaw("DROP TABLE [dbo].[Table]");
-            //    //context.Database.ExecuteSqlRaw("DROP TABLE [dbo].[Team]");
-            //    //context.Database.ExecuteSqlRaw("DROP TABLE [dbo].[UserGame]");
-            //    context.SaveChanges();
-            //}
-            //finally
-            //{
-            //    context.Database.CloseConnection();
-            //}
+            //context.Database.EnsureDeleted();
 
             context.Database.EnsureCreated();
 
@@ -316,8 +310,8 @@ namespace NewYork_BackEnd.Models
 
             #region Game
             context.AddRange(
-                new Game { GameID = 1, Type = "1vs1", ScoreTeam1 = 11, ScoreTeam2 = 5, Date = DateTime.Now.AddDays(-5), Team1ID = 1, Team2ID = 2, TableID = 1, CompetitionID = 1, GameStatusID = 3},
-                new Game { GameID = 2, Type = "1vs1", ScoreTeam1 = 11, ScoreTeam2 = 3, Date = DateTime.Now.AddDays(-5), Team1ID = 3, Team2ID = 4, TableID = 2, CompetitionID = 1, GameStatusID = 3},
+                new Game { GameID = 1, Type = "1vs1", ScoreTeam1 = 11, ScoreTeam2 = 5, Date = DateTime.Now.AddDays(-5), Team1ID = 1, Team2ID = 2, TableID = 1, CompetitionID = 1, GameStatusID = 3 },
+                new Game { GameID = 2, Type = "1vs1", ScoreTeam1 = 11, ScoreTeam2 = 3, Date = DateTime.Now.AddDays(-5), Team1ID = 3, Team2ID = 4, TableID = 2, CompetitionID = 1, GameStatusID = 3 },
                 new Game { GameID = 3, Type = "1vs1", ScoreTeam1 = 11, ScoreTeam2 = 5, Date = DateTime.Now.AddDays(-2), Team1ID = 3, Team2ID = 1, TableID = 3, CompetitionID = 1, GameStatusID = 3 },
                 new Game { GameID = 4, Type = "1vs1", ScoreTeam1 = 8, ScoreTeam2 = 11, Date = DateTime.Now.AddDays(-3), Team1ID = 2, Team2ID = 4, TableID = 4, CompetitionID = 1, GameStatusID = 3 },
 
