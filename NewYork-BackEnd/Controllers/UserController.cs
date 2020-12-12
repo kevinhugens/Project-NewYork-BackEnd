@@ -34,7 +34,6 @@ namespace NewYork_BackEnd.Controllers
         }
 
         // GET: api/User/5
-        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
@@ -48,6 +47,7 @@ namespace NewYork_BackEnd.Controllers
             return user;
         }
 
+        [Authorize]
         [HttpGet("team")]
         public async Task<ActionResult<IEnumerable<User>>> GetUsersWithoutTeam()
         {
@@ -68,12 +68,26 @@ namespace NewYork_BackEnd.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, User user)
         {
+            User userindb = await _context.Users.FindAsync(user.UserID);
             if (id != user.UserID)
             {
                 return BadRequest();
             }
+            if(user.Password == null)
+            {
+                userindb.Password = "newpassword";
+            }
+            if (user.Password != userindb.Password)
+            {
+                userindb.HashSalt = Hashing.getSalt();
+                userindb.Password = Hashing.getHash(user.Password, userindb.HashSalt);
+            }
+            userindb.FirstName = user.FirstName;
+            userindb.LastName = user.LastName;
+            userindb.Email = user.Email;
+            userindb.DateOfBirth = user.DateOfBirth;
 
-            _context.Entry(user).State = EntityState.Modified;
+            _context.Entry(userindb).State = EntityState.Modified;
 
             try
             {
@@ -93,6 +107,33 @@ namespace NewYork_BackEnd.Controllers
 
             return NoContent();
         }
+        [HttpPut("updateprofilepicture/{filename}")]
+        public async Task<IActionResult> PutUserProfilePicture(string filename, User user)
+        {
+            User userindb = await _context.Users.FindAsync(user.UserID);
+            userindb.Photo = filename;
+
+            _context.Entry(userindb).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (user == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
 
         // POST: api/User
         // To protect from overposting attacks, enable the specific properties you want to bind to, for

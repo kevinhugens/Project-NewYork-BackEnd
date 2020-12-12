@@ -106,7 +106,7 @@ namespace NewYork_BackEnd.Controllers
 
             return game;
         }
-
+        [Authorize]
         [HttpGet("competition/next/{id}")]
         public async Task<ActionResult<Game>> GetNextCompetitionGame(int id)
         {
@@ -127,7 +127,7 @@ namespace NewYork_BackEnd.Controllers
 
             return game;
         }
-
+        [Authorize]
         [HttpGet("friendly/next/{id}")]
         public async Task<ActionResult<Game>> GetNextFriendlyGame(int id)
         {
@@ -245,6 +245,7 @@ namespace NewYork_BackEnd.Controllers
         }
 
         // DELETE: api/Game/5
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Game>> DeleteGame(int id)
         {

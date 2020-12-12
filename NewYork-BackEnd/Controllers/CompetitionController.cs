@@ -49,7 +49,7 @@ namespace NewYork_BackEnd.Controllers
         // PUT: api/Competition/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [Authorize]
+        [Authorize(Policy = "AdminOnly")] // Only an admin can edit competitions
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCompetition(int id, Competition competition)
         {
@@ -82,7 +82,7 @@ namespace NewYork_BackEnd.Controllers
         // POST: api/Competition
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [Authorize]
+        [Authorize(Policy = "AdminOnly")] // Only an admin can make competitions
         [HttpPost]
         public async Task<ActionResult<Competition>> PostCompetition(Competition competition)
         {
@@ -93,7 +93,7 @@ namespace NewYork_BackEnd.Controllers
         }
 
         // DELETE: api/Competition/5
-        [Authorize]
+        [Authorize(Policy = "AdminOnly")] // Only an admin can delete a competition
         [HttpDelete("{id}")]
         public async Task<ActionResult<Competition>> DeleteCompetition(int id)
         {

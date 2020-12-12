@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.WindowsAzure.Storage;
@@ -15,10 +16,25 @@ namespace NewYork_BackEnd.Controllers
     public class UploadController : ControllerBase
     {
         // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{filename}")]
+        public async Task<Uri> Delete(string filename)
         {
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(AppConfiguration.GetConfiguration("AccessKey"));
+            CloudBlobClient BlobClient = storageAccount.CreateCloudBlobClient();
+            CloudBlobContainer container = BlobClient.GetContainerReference("newyork-thebigapp");
+            CloudBlockBlob blob = container.GetBlockBlobReference(filename);
+            bool exists = await blob.ExistsAsync();
+            if (exists)
+            {
+                await blob.DeleteAsync();
+                return blob.Uri;
+            }
+            else
+            {
+                return null;
+            }
         }
+
         [HttpPost]
         public async Task<IActionResult> UploadTeamImage(IFormFile file)
         {
@@ -31,6 +47,7 @@ namespace NewYork_BackEnd.Controllers
             return Ok("File uploaded");
         }
 
+        [Authorize]
         [HttpGet("{filename}")]
         public async Task<Uri> GetPhoto(string filename)
         {
