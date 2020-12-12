@@ -70,12 +70,17 @@ namespace NewYork_BackEnd.Controllers
         {
             DateTime date = DateTime.Today;
             var games = await _context.Game.Include(g => g.Team1).Include(g => g.Team2).Where(g => g.CompetitionID != null && g.Date > date).Where(g => g.GameStatusID == 1 || g.GameStatusID == 2).ToListAsync();
+            if (games.Count() == 0)
+            {
+                return NoContent();
+            }
+
             var orderedgames = games.OrderBy(g => g.Date);
             var game = orderedgames.First();
 
             if (game == null)
             {
-                return NotFound();
+                return NoContent();
             }
 
             return game;
@@ -86,12 +91,17 @@ namespace NewYork_BackEnd.Controllers
         {
             DateTime date = DateTime.Today;
             var games = await _context.Game.Include(g => g.Team1).Include(g => g.Team2).Where(g => g.CompetitionID == null && g.Date > date ).Where(g => g.GameStatusID == 1 || g.GameStatusID == 2).ToListAsync();
+            if (games.Count() == 0)
+            {
+                return NoContent();
+            }
+
             var orderedgames = games.OrderBy(g => g.Date);
             var game = orderedgames.First();
 
             if (game == null)
             {
-                return NotFound();
+                return NoContent();
             }
 
             return game;
@@ -102,12 +112,17 @@ namespace NewYork_BackEnd.Controllers
         {
             DateTime date = DateTime.Today;
             var games = await _context.Game.Include(g => g.Team1).Include(g => g.Team2).Where(g => g.CompetitionID != null && g.Date > date).Where(g => g.GameStatusID == 1 || g.GameStatusID == 2).Where(g=> g.Team1ID == id || g.Team2ID == id).ToListAsync();
+            if (games.Count() == 0)
+            {
+                return NoContent();
+            }
+
             var orderedgames = games.OrderBy(g => g.Date);
             var game = orderedgames.First();
 
             if (game == null)
             {
-                return NotFound();
+                return NoContent();
             }
 
             return game;
@@ -118,12 +133,17 @@ namespace NewYork_BackEnd.Controllers
         {
             DateTime date = DateTime.Today;
             var games = await _context.Game.Include(g => g.Team1).Include(g => g.Team2).Where(g => g.CompetitionID == null && g.Date > date && g.GameStatusID == 1).Where(g => g.Team1ID == id || g.Team2ID == id).ToListAsync();
+            if(games.Count() == 0)
+            {
+                return NoContent();
+            }
+            
             var orderedgames = games.OrderBy(g => g.Date);
             var game = orderedgames.First();
 
             if (game == null)
             {
-                return NotFound();
+                return NoContent();
             }
 
             return game;
@@ -134,12 +154,17 @@ namespace NewYork_BackEnd.Controllers
         {
             DateTime date = DateTime.Today;
             var games = await _context.Game.Where(g => g.CompetitionID == null && g.Date > date && (g.Team1ID == teamID || g.Team2ID == teamID)).ToListAsync();
+            if (games.Count() == 0)
+            {
+                return NoContent();
+            }
+
             var orderedgames = games.OrderBy(g => g.Date);
             var game = orderedgames.First();
 
             if (game == null)
             {
-                return NotFound();
+                return NoContent();
             }
 
             return game;
