@@ -15,10 +15,25 @@ namespace NewYork_BackEnd.Controllers
     public class UploadController : ControllerBase
     {
         // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{filename}")]
+        public async Task<Uri> Delete(string filename)
         {
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(AppConfiguration.GetConfiguration("AccessKey"));
+            CloudBlobClient BlobClient = storageAccount.CreateCloudBlobClient();
+            CloudBlobContainer container = BlobClient.GetContainerReference("newyork-thebigapp");
+            CloudBlockBlob blob = container.GetBlockBlobReference(filename);
+            bool exists = await blob.ExistsAsync();
+            if (exists)
+            {
+                await blob.DeleteAsync();
+                return blob.Uri;
+            }
+            else
+            {
+                return null;
+            }
         }
+
         [HttpPost]
         public async Task<IActionResult> UploadTeamImage(IFormFile file)
         {
