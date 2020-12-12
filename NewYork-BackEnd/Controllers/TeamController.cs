@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +16,7 @@ using NewYork_BackEnd.Models;
 
 namespace NewYork_BackEnd.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class TeamController : ControllerBase
@@ -27,6 +29,7 @@ namespace NewYork_BackEnd.Controllers
         }
 
         // GET: api/Team
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Team>>> GetTeam()
         {
@@ -34,6 +37,7 @@ namespace NewYork_BackEnd.Controllers
         }
 
         // GET: api/Team/5
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<Team>> GetTeam(int id)
         {
@@ -50,6 +54,7 @@ namespace NewYork_BackEnd.Controllers
         // PUT: api/Team/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTeam(int id, Team team)
         {
@@ -82,6 +87,7 @@ namespace NewYork_BackEnd.Controllers
         // POST: api/Team
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<Team>> PostTeam(Team team)
         {
@@ -92,6 +98,7 @@ namespace NewYork_BackEnd.Controllers
         }
 
         // DELETE: api/Team/5
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Team>> DeleteTeam(int id)
         {

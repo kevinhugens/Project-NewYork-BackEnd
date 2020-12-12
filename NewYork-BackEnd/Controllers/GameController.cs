@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using NewYork_BackEnd.Models;
 
 namespace NewYork_BackEnd.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class GameController : ControllerBase
@@ -22,6 +24,7 @@ namespace NewYork_BackEnd.Controllers
         }
 
         // GET: api/Game
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Game>>> GetGame()
         {
@@ -34,6 +37,12 @@ namespace NewYork_BackEnd.Controllers
             return await _context.Game.Include(g => g.Team1).Include(g => g.Team2).Where(g => g.Team1ID == id || g.Team2ID == id).ToListAsync();
         }
 
+        [HttpGet("live")]
+        public async Task<ActionResult<IEnumerable<Game>>> GetLiveGames()
+        {
+            return await _context.Game.Include(g => g.Team1).Include(g => g.Team2).Where(g => g.GameStatusID == 2).ToListAsync();
+        }
+
         [HttpGet("nextgamesbyteam/{id}")]
         public async Task<ActionResult<IEnumerable<Game>>> GetNextGamesFromTeam(int id)
         {
@@ -42,6 +51,7 @@ namespace NewYork_BackEnd.Controllers
         }
 
         // GET: api/Game/5
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<Game>> GetGame(int id)
         {
@@ -54,12 +64,12 @@ namespace NewYork_BackEnd.Controllers
 
             return game;
         }
-
+        [Authorize]
         [HttpGet("competition/next")]
         public async Task<ActionResult<Game>> GetNextCompetitionGame()
         {
             DateTime date = DateTime.Today;
-            var games = await _context.Game.Include(g => g.Team1).Include(g => g.Team2).Where(g => g.CompetitionID != null && g.Date > date && g.GameStatusID == 1).ToListAsync();
+            var games = await _context.Game.Include(g => g.Team1).Include(g => g.Team2).Where(g => g.CompetitionID != null && g.Date > date).Where(g => g.GameStatusID == 1 || g.GameStatusID == 2).ToListAsync();
             var orderedgames = games.OrderBy(g => g.Date);
             var game = orderedgames.First();
 
@@ -70,12 +80,12 @@ namespace NewYork_BackEnd.Controllers
 
             return game;
         }
-
+        [Authorize]
         [HttpGet("friendly/next")]
         public async Task<ActionResult<Game>> GetNextFriendlyGame()
         {
             DateTime date = DateTime.Today;
-            var games = await _context.Game.Include(g => g.Team1).Include(g => g.Team2).Where(g => g.CompetitionID == null && g.Date > date && g.GameStatusID == 1).ToListAsync();
+            var games = await _context.Game.Include(g => g.Team1).Include(g => g.Team2).Where(g => g.CompetitionID == null && g.Date > date ).Where(g => g.GameStatusID == 1 || g.GameStatusID == 2).ToListAsync();
             var orderedgames = games.OrderBy(g => g.Date);
             var game = orderedgames.First();
 
@@ -91,7 +101,7 @@ namespace NewYork_BackEnd.Controllers
         public async Task<ActionResult<Game>> GetNextCompetitionGame(int id)
         {
             DateTime date = DateTime.Today;
-            var games = await _context.Game.Include(g => g.Team1).Include(g => g.Team2).Where(g => g.CompetitionID != null && g.Date > date && g.GameStatusID == 1).Where(g=> g.Team1ID == id || g.Team2ID == id).ToListAsync();
+            var games = await _context.Game.Include(g => g.Team1).Include(g => g.Team2).Where(g => g.CompetitionID != null && g.Date > date).Where(g => g.GameStatusID == 1 || g.GameStatusID == 2).Where(g=> g.Team1ID == id || g.Team2ID == id).ToListAsync();
             var orderedgames = games.OrderBy(g => g.Date);
             var game = orderedgames.First();
 
@@ -118,7 +128,7 @@ namespace NewYork_BackEnd.Controllers
 
             return game;
         }
-
+        [Authorize]
         [HttpGet("friendly/next/user/{teamID}")]
         public async Task<ActionResult<Game>> GetNextFriendlyGameUser(int teamID)
         {
@@ -134,7 +144,7 @@ namespace NewYork_BackEnd.Controllers
 
             return game;
         }
-
+        [Authorize]
         [HttpGet("friendly/planned/team/{teamID}")]
         public async Task<ActionResult<IEnumerable<Game>>> GetPlannedFriendlyTeamGames(int teamID)
         {
@@ -148,7 +158,7 @@ namespace NewYork_BackEnd.Controllers
 
             return games;
         }
-
+        [Authorize]
         [HttpGet("friendly/played/team/{teamID}")]
         public async Task<ActionResult<IEnumerable<Game>>> GetPlayedFriendlyTeamGames(int teamID)
         {
@@ -166,6 +176,7 @@ namespace NewYork_BackEnd.Controllers
         // PUT: api/Game/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutGame(int id, Game game)
         {
@@ -198,6 +209,7 @@ namespace NewYork_BackEnd.Controllers
         // POST: api/Game
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<Game>> PostGame(Game game)
         {
