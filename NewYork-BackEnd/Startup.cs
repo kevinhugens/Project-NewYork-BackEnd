@@ -47,7 +47,7 @@ namespace NewYork_BackEnd
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("AdminOnly", policy => policy.RequireClaim("Role", "'admin'"));
+                options.AddPolicy("AdminOnly", policy => policy.RequireClaim("Role", "admin"));
             });
 
             // Register the Swagger generator, defining 1 or more Swagger documents

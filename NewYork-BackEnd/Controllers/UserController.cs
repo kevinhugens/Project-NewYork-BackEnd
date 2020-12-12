@@ -107,6 +107,7 @@ namespace NewYork_BackEnd.Controllers
 
             return NoContent();
         }
+        [Authorize]
         [HttpPut("updateprofilepicture/{filename}")]
         public async Task<IActionResult> PutUserProfilePicture(string filename, User user)
         {
